@@ -1,0 +1,37 @@
+CREATE OR ALTER PROCEDURE SP_SYSO_ESTOQUE_COD_BARRAS(
+    ID_PRODUTO VARCHAR(20),
+    COD_BARRAS_GESTOR_ESTOQUE VARCHAR(15),
+    LOCALIZACAO VARCHAR(20)
+)
+AS
+DECLARE VARIABLE PROD_EXISTE INTEGER;
+BEGIN
+
+    SELECT COUNT(*)
+    FROM SYSO_ESTOQUE_COD_BARRAS
+    WHERE ID_PRODUTO = :ID_PRODUTO
+    INTO :PROD_EXISTE;
+
+    BEGIN
+    if (PROD_EXISTE = 0) then
+        BEGIN
+            INSERT INTO SYSO_ESTOQUE_COD_BARRAS (
+                DATAHORA,
+                ID_PRODUTO,
+                COD_BARRAS_GESTOR_ESTOQUE,
+                LOCALIZACAO,
+                ALTERADO
+            )
+            VALUES(
+                CURRENT_TIMESTAMP,
+                :ID_PRODUTO,
+                :COD_BARRAS_GESTOR_ESTOQUE,
+                :LOCALIZACAO,
+                0
+            );
+        END
+    END
+END;
+
+
+

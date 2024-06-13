@@ -1,0 +1,36 @@
+﻿@model IList<AMAPA.Models.MovimentoProdutoDevolvido>
+
+@using Newtonsoft.Json;
+@{
+    var usuario = (!string.IsNullOrEmpty(Context.Session.GetString("user"))) ? JsonConvert.DeserializeObject<Usuarios>(Context.Session.GetString("user")) : new Usuarios();
+}
+
+<table class="table table-striped table-hover" data-toggle="data-table">
+    <thead>
+        <tr>
+            <th class="text-center"> Data </th>
+            <th class="text-center"> Descrição </th>
+            <th class="text-center"> Produto </th>
+            <th class="text-center">Fabricante</th>
+            <th class="text-center"> Qtde </th>
+            <th class="text-center"> Executor </th>
+            <th class="text-center"> Estoquista </th>
+            <th class="text-center"> Quem devolveu</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movimento in Model)
+        {
+            <tr>
+                <td>@movimento.DATA_MOVIMENTO</td>
+                <td>@movimento.IDENTIFICADOR_OS</td>
+                <td>Id Produto: @movimento.ID_PRODUTO; <br /> Produto: @movimento.DESCRICAO</td>
+                <td>@movimento.CODIGO_FABRICANTE</td>
+                <td>@movimento.QUANT_INTEIRA</td>
+                <td>@movimento.ID_EXECUTOR - @movimento.NOME_EXECUTOR</td>
+                <td>@movimento.ID_USUARIO - @movimento.NOME_USUARIO</td>
+                <td>@movimento.ID_USUARIO_ULT_OPERACAO - @movimento.NOME_USUARIO_ULT_OPERACAO</td>
+            </tr>
+        }
+    </tbody>
+</table>

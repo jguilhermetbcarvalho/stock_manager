@@ -1,0 +1,196 @@
+﻿@model IList<AMAPA.Models.MovimentoProdutoCarrinho>
+
+@using Newtonsoft.Json;
+@{
+    var usuario = (!string.IsNullOrEmpty(Context.Session.GetString("user"))) ? JsonConvert.DeserializeObject<Usuarios>(Context.Session.GetString("user")) : new Usuarios();
+}
+
+<div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Adicionar produtos no carrinho</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <form id="form-body" class="dynamicForm" autocomplete="off" method="post" asp-controller="Produto" asp-action="AdicionarProdutoCarrinho" onsubmit="return validarQuantidade()">
+
+                    <label for="idProd">Código do produto</label>
+                    <div class="input-with-icon">
+                        <input id="idProd" type="search" name="idProduto" class="form-control form-control-sm" required>
+                        <ul id="search-idProd" class="dropdown-content search" style="display: none;" onclick="BuscarProdutoIdProdutoIndividual()"></ul>
+                        <button id="btn-idProd" class="icon fas fa-search" type="button" onclick="BuscarProdutoIdProdutoIndividual()"></button>
+                    </div>
+
+                    <label for="codBarras">Código de barras</label>
+                    <div class="input-with-icon">
+                        <input id="codBarras" type="search" name="codigoBarras" class="form-control form-control-sm" required>
+                        <ul id="search-codBarras" class="dropdown-content search" style="display: none;" onclick="BuscarProdutoCodigoBarrasIndividual()"></ul>
+                        <button id="btn-codBarras" class="icon fas fa-search" type="button" onclick="BuscarProdutoCodigoBarrasIndividual()"></button>
+                    </div>
+
+                    <label for="codFrab">Código do fabricante</label>
+                    <div class="input-with-icon">
+                        <input id="codFrab" type="search" name="codigoFabricante" class="form-control form-control-sm" required>
+                        <ul id="search-codFrab" class="dropdown-content search" style="display: none;" onclick="BuscarProdutoCodigoFabricanteIndividual()"></ul>
+                        <button id="btn-codFrab" class="icon fas fa-search btn-confirmar" type="button" onclick="BuscarProdutoCodigoFabricanteIndividual()"></button>
+                    </div>
+
+                    <label>Descrição do produto</label>
+                    <input type="text" name="descricao" id="descricao" class="form-control form-control-sm" required />
+
+                    <label>Quantidade</label>
+                    <input type="text" id="quantInteira" name="quantInteira" class="form-control form-control-sm" required />
+
+                    <label>Descrição</label>
+                    <input type="text" id="veiculo" name="veiculo" class="form-control form-control-sm text-uppercase" required />
+
+                    <label>Executor</label>
+                    <select name="idExecutor" class="form-select form-select-sm" asp-items="@ViewBag.EXECUTORES" required>
+                        <option></option>
+                    </select>
+
+                    <label>Estoquista</label>
+                    <select name="idEstoquista" class="form-select form-select-sm" asp-items="@ViewBag.EXECUTORES" required>
+                        <option></option>
+                    </select>
+
+                    <input type="hidden" id="loc" name="localizacao" required />
+
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary btn-confirmar-vermelho" data-bs-dismiss="modal">
+                            Fechar
+                        </button>
+                        <button id="salvar" type="submit" class="btn btn-confirmar-verde">
+                            Salvar Alterações
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+<script>
+    var inputVeiculo = document.getElementById("veiculo");
+
+    document.getElementById("form-body").addEventListener("submit", function (event) {
+
+        inputVeiculo.value = inputVeiculo.value.toUpperCase();
+    });
+</script>
+
+<script>
+
+    // Btn Fechar
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.altKey && event.key === "f") {
+                var modalElement = document.querySelector('.modal.show');
+                if (modalElement) {
+                    var modal = bootstrap.Modal.getInstance(modalElement);
+                    modal.hide();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+    // Btn Salvar
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.altKey && event.key === "s") {
+                var salvarButton = document.getElementById("salvar");
+                if (salvarButton) {
+                    salvarButton.click();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+    // swal2 - confirm
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter") {
+                var button = document.querySelector(".swal2-confirm");
+                if (button) {
+                    button.click();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+    // Btn idProd
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && document.activeElement.id === "idProd") {
+                var button = document.getElementById("btn-idProd");
+                if (button) {
+                    button.click();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+    // Btn codBarras
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && document.activeElement.id === "codBarras") {
+                var button = document.getElementById("btn-codBarras");
+                if (button) {
+                    button.click();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+    // Btn codFrab
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            if (event.key === "Enter" && document.activeElement.id === "codFrab") {
+                var button = document.getElementById("btn-codFrab");
+                if (button) {
+                    button.click();
+                    event.preventDefault();
+                }
+            }
+        });
+    });
+
+</script>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('staticBackdrop');
+
+        // Adiciona um evento para quando o modal for exibido
+        modal.addEventListener('shown.bs.modal', function () {
+            // Define o foco no campo "codBarras"
+            document.getElementById('codBarras').focus();
+        });
+    });
+</script>
+
+<script>
+    // Evento de input para detectar a entrada de texto no campo codFrab, codBarras, idProd
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("idProd").addEventListener("input", function (event) {
+            BuscarProdutoIdProdutoLista();
+        });
+        document.getElementById("codBarras").addEventListener("input", function (event) {
+            BuscarProdutoCodigoBarrasLista();
+        });
+
+        document.getElementById("codFrab").addEventListener("input", function (event) {
+            BuscarProdutoCodigoFabricanteLista();
+        });
+    });
+</script>
+

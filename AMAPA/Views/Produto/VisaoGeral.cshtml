@@ -1,0 +1,110 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visão Geral - Auto Elétrica Amapá</title>
+</head>
+
+<body>
+    <h1 class="text-center" style="margin-top: 5rem; color:#0C112E">Gestor de Estoque</h1>
+    <p id="dataAtual" class="text-center" style="color: #0C112E;"></p>
+
+    <div class="row" style="margin-top: 3rem;">
+        <div class="col-lg-6 col-md-6">
+            <div class="card card-transition" style="cursor:pointer;">
+                <a href="~/Produto/ProdutoPendente" style="color:#9592A6;">
+                    <div class="card-body card-dash">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-white rounded p-3" style="background-color:#000030">
+                                <img src="~/assets/images/pendente.png" width="50" style="filter: brightness(0) invert(1);" />
+                            </div>
+                            <div class="text-end">
+                                Pendentes
+                                <h2 class="counter">@ViewBag.pendente</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+
+        <div class="col-lg-6 col-md-6">
+            <div class="card card-transition" style="cursor:pointer;">
+                <a href="~/Produto/ProdutoEntregue" style="color:#9592A6;">
+                    <div class="card-body card-dash">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-white rounded p-3" style="background-color:#000030">
+                                <img src="~/assets/images/entregue.png" width="50" style="filter: brightness(0) invert(1);" />
+                            </div>
+                            <div class="text-end">
+                                Entregues
+                                <h2 class="counter">@ViewBag.entregue</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" style="margin-top: 1rem;">
+        <div class="col-lg-6 col-md-6">
+            <div class="card card-transition" style="cursor:pointer;">
+                <a href="~/Produto/ProdutoCarrinho" style="color:#9592A6;">
+                    <div class="card-body card-dash">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-white rounded p-3" style="background-color:#000030">
+                                <img src="~/assets/images/carrinho.png" width="50" style="filter: brightness(0) invert(1);" />
+                            </div>
+                            <div class="text-end">
+                                Carrinho
+                                <h2 class="counter">@ViewBag.carrinho</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="col-lg-6 col-md-6">
+            <div class="card card-transition" style="cursor:pointer;">
+                <a href="~/Produto/ProdutoDevolvido" style="color:#9592A6;">
+                    <div class="card-body card-dash">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div class="text-white rounded p-3" style="background-color:#000030">
+                                <img src="~/assets/images/devolucao.png" width="50" style="filter: brightness(0) invert(1);" />
+                            </div>
+                            <div class="text-end">
+                                Devoluções
+                                <h2 class="counter">@ViewBag.devolvido</h2>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    function getDataAtual() {
+        var data = new Date();
+        var dia = String(data.getDate()).padStart(2, '0');
+        var mes = String(data.getMonth() + 1).padStart(2, '0');
+        var ano = data.getFullYear();
+        return dia + '/' + mes + '/' + ano;
+    }
+
+    var elementoData = document.getElementById('dataAtual');
+
+    elementoData.textContent = 'Controle do dia: ' + getDataAtual();
+
+</script>

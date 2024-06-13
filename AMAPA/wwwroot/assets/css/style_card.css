@@ -1,0 +1,79 @@
+﻿.card-login select {
+    border: 01x solid #ccc; /* Define a borda do campo de entrada */
+    border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-login input[type="password"] {
+    border: 0px solid #ccc; /* Define a borda do campo de entrada */
+    border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card {
+    width: 100%;
+}
+
+.card-transition {
+    transition: transform 0.5s, box-shadow 0.3s;
+}
+    .card-transition:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+
+.style-card {
+    background: #F8F9FA; /* Cor de fundo */
+    border:none; /* Borda */
+    border-radius: 15px; /* Raio da borda */
+    padding: 15px; /* Espaçamento interno */
+}
+
+.style-card-shadow {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+.card-body {
+    padding: 10px; /* Reduzindo o padding do corpo do cartão */
+}
+
+    .card-body input[type="text"] {
+        width: 80%; /* Define a largura do campo de entrada como 80% */
+        padding: 4px; /* Define o preenchimento interno do campo de entrada */
+        border: 1px solid #ccc; /* Define a borda do campo de entrada */
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+        box-sizing: border-box; /* Define o modelo de caixa (box-sizing) para incluir preenchimento e borda na largura total */
+        color: gray;
+    }
+
+        .card-body input[type="text"]:focus {
+            border-color: #0066ff; /* Define a cor da borda quando o campo está em foco */
+            outline: none; /* Remove o contorno padrão que alguns navegadores adicionam quando um campo está em foco */
+        }
+
+.card-user {
+    margin: 20px;
+    padding: 12px;
+    border-radius: 10px;
+    background-color: #F8F9FA;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.card-dash {
+    border-radius: 10px;
+    background-color: #F8F9FA;
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+.columns {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.column {
+    flex-basis: calc(50% - 10px); /* 50% width for each column with spacing */
+    margin-bottom: 10px; /* Space between cards */
+}

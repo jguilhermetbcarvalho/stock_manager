@@ -1,0 +1,31 @@
+﻿<div class="modal fade" id="modalVincular" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Liberação - Vinculação de produtos</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input type="hidden" name="produtosVincular" id="listaProdutosModalVincular" />
+
+                <label>Ordem de Serviço</label>
+                <input type="text" name="idMovimento" class="form-control form-control-sm" required style="width:100%;" />
+
+                <label style="padding-top: 1rem">Estoquista</label>
+                <select class="form-select custom-input" asp-items="@ViewBag.EXECUTORES" name="login" required>
+                    <option></option>
+                </select>
+
+                <labeL style="padding-top: 1rem">Senha</labeL>
+                <input type="password" name="senha" id="senha-vinc" class="form-control custom-input">
+
+                <div class="text-center">
+                    <button id="confirma-vincular" class="btn btn-primary btn-modal" type="submit" style="margin-top: 2rem;">
+                        Confirmar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

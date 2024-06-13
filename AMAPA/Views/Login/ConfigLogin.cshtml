@@ -1,0 +1,118 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+@model IList<AMAPA.Models.Usuarios>
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Configuração de Usuários</title>
+
+    <style>
+        .user-group {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.6s ease-in-out;
+        }
+
+            .user-group.active {
+                max-height: 1000px; /* Ajuste conforme necessário */
+            }
+
+        .passwords {
+            max-height: 0; /* Inicialmente, definimos a altura máxima como 0 */
+            overflow: hidden; /* Escondemos qualquer conteúdo além da altura máxima */
+            transition: max-height 1s ease-in-out; /* Adicionamos uma transição suave */
+        }
+
+            .passwords.show {
+                max-height: 1000px; /* Definimos a altura máxima para um valor grande o suficiente para acomodar o conteúdo */
+            }
+
+        .btn-opacity {
+            opacity: 0; /* Inicialmente, definimos a opacidade do botão como 0 */
+            transition: opacity 1s ease; /* Adicionamos uma transição suave para a opacidade */
+        }
+
+        .passwords.show .btn-opacity {
+            opacity: 1; /* Quando a classe 'show' é aplicada ao pai, definimos a opacidade do botão como 1 */
+        }
+    </style>
+
+
+</head>
+
+<body>
+    <div style="margin-top:4.5rem; position: relative;">
+        @foreach (var group in Model.GroupBy(u => u.DESCRICAO_TIPO_USUARIO))
+        {
+            <div class="mb-4 mt-4 card-user">
+                <div>
+                    <h5>@group.Key <i class="fas fa-chevron-down toggle-icon" onclick="toggleUsers(this)" style="cursor: pointer;"></i></h5>
+                </div>
+                <div class="user-group">
+                    @foreach (var item in group)
+                    {
+                        <div class="mb-3 card-user">
+                            <div>
+                                <div>
+                                    <strong>Id:</strong> @item.ID_USUARIO
+                                    <br />
+                                    <strong>Nome:</strong> @item.NOME_USUARIO
+
+                                    <div class="passwords">
+                                        <form class="userForm" method="post" asp-controller="Login" asp-action="AlterarSenhaUsuario">
+                                            @if (item.DESCRICAO_TIPO_USUARIO == "DIRETORIA")
+                                            {
+                                                <label for="senhaDiretoria"> <strong>Senha de acesso:</strong></label>
+                                                <input type="password" id="senhaDiretoria" name="senhaAcesso">
+                                                <br />
+                                            }
+                                            <label for="senhaLiberacao"><strong>Senha de liberacao:</strong> </label>
+                                            <input id="senhaLiberacao" type="password" name="senhaLiberacao">
+                                            <br />
+
+                                            <label for="naoValidarSenha"><strong>Não validar senha de liberação:</strong></label>
+                                            <input type="checkbox" id="naoValidarSenha" class="custom-checkbox" name="naoValidarSenha" value="true">
+                                            <input type="hidden" value="@item.ID_USUARIO" name="idUsuario" />
+
+                                            <button class="btn btn-confirmar-azul btn-opacity" type="submit" style="position: absolute; bottom: 15px; right: 15px;">Salvar</button>
+                                        </form>
+                                    </div>
+                                </div>
+                                <div style="position: absolute; top: 5px; right: 5px;">
+                                    <i class="fas fa-edit" onclick="togglePasswords(this)" style="cursor: pointer;"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</body>
+
+</html>
+
+<script>
+    function togglePasswords(icon) {
+        var passwords = icon.parentNode.previousElementSibling.querySelector('.passwords');
+        if (passwords.classList.contains('show')) {
+            passwords.classList.remove('show');
+        } else {
+            passwords.classList.add('show');
+        }
+    }
+</script>
+
+<script>
+    function toggleUsers(icon) {
+        var userGroup = icon.closest('.card-user').querySelector('.user-group');
+        userGroup.classList.toggle('active');
+    }
+</script>
+

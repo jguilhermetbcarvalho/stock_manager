@@ -1,0 +1,57 @@
+﻿.body-table-pendente th, td {
+    word-wrap: break-word !important; /* Para navegadores mais antigos */
+    overflow-wrap: break-word !important; /* Para navegadores modernos */
+    white-space: normal;
+}
+
+    /* Ajusta a largura da coluna "Data" */
+    .body-table-pendente td:nth-child(1),
+    .body-table-pendente th:nth-child(1) { /* Seleciona o dropdown no cabeçalho da sexta coluna */
+        width: 8%;
+    }
+
+    /* Ajusta a largura da coluna "O.S" */
+    .body-table-pendente td:nth-child(2),
+    .body-table-pendente th:nth-child(2) { /* Seleciona o dropdown no cabeçalho da sexta coluna */
+        width: 8%;
+    }
+
+    /* Ajusta a largura da coluna "Descrição" */
+    .body-table-pendente td:nth-child(3),
+    .body-table-pendente th:nth-child(3) {
+        text-align: left;
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Produto" */
+    .body-table-pendente td:nth-child(4),
+    .body-table-pendente th:nth-child(4) {
+        text-align: left;
+        width: 30%;
+    }
+
+    /* Ajusta a largura da coluna "Fabricante" */
+    .body-table-pendente td:nth-child(5),
+    .body-table-pendente th:nth-child(5) {
+        text-align: left;
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Localização" */
+    .body-table-pendente td:nth-child(6),
+    .body-table-pendente th:nth-child(6) {
+        text-align: left;
+        width: 8%;
+    }
+
+    /* Ajusta a largura da coluna "Quantidade" */
+    .body-table-pendente td:nth-child(7),
+    .body-table-pendente th:nth-child(7) {
+        width: 8%;
+    }
+
+    /* Ajusta a largura da coluna "Entregar" */
+    .body-table-pendente td:nth-child(8),
+    .body-table-pendente th:nth-child(8) {
+        width: 8%;
+    }

@@ -1,0 +1,40 @@
+﻿.btn-confirmar-verde {
+    background-color: forestgreen;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    .btn-confirmar-verde:hover {
+        background-color: forestgreen; /* Cor de fundo ao passar o mouse */
+    }
+
+.btn-confirmar-vermelho {
+    background-color: darkred;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+    .btn-confirmar-vermelho:hover {
+        background-color: darkred; /* Cor de fundo ao passar o mouse */
+    }
+
+.btn-confirmar-azul {
+    background-color: darkblue;
+    color: #fff;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 5px;
+    cursor: pointer
+}
+    .btn-confirmar-azul:hover {
+        background-color: darkblue; /* Cor de fundo ao passar o mouse */
+    }
+
+    .btn-confirmar-azul:focus {
+        outline: none; /* Remove a borda de foco padrão */
+        background-color: darkblue; /* Substitua "seucor" pela cor desejada */
+    }

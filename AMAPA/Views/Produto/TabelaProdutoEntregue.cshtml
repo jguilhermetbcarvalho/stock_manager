@@ -1,0 +1,84 @@
+﻿@model IList<AMAPA.Models.MovimentoProdutoEntregue>
+
+@using Newtonsoft.Json;
+@{
+    var usuario = (!string.IsNullOrEmpty(Context.Session.GetString("user"))) ? JsonConvert.DeserializeObject<Usuarios>(Context.Session.GetString("user")) : new Usuarios();
+}
+
+<table class="table table-striped table-hover" data-toggle="data-table">
+    <thead>
+        <tr>
+            <th class="text-center"> Data </th>
+            <th class="text-center"> O.S </th>
+            <th class="text-center"> Descrição </th>
+            <th class="text-center"> Produto </th>
+            <th class="text-center"> Fabricante </th>
+            <th class="text-center"> Qtde </th>
+            <th class="text-center"> Executor </th>
+            <th class="text-center"> Estoquista </th>
+            <th class="text-center"> Selecionar </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movimento in Model)
+        {
+            <tr>
+                <td> @movimento.DATA_MOVIMENTO </td>
+                <td> @movimento.ID_MOVIMENTO </td>
+                <td> @movimento.IDENTIFICA_OS </td>
+                <td>Id Produto: @movimento.ID_PRODUTO; <br /> Produto: @movimento.PRODUTO</td>
+                <td> @movimento.CODIGO_FABRICA </td>
+                <td> @movimento.QTDE_INTEIRA </td>
+                <td> @movimento.ID_EXECUTOR-@movimento.NOME_EXECUTOR </td>
+                <td> @movimento.ID_USUARIO-@movimento.NOME_ESTOQUISTA </td>
+                <td>
+
+                    <input id="checkbox-remove" class="check-remove styled-checkbox" type="checkbox" onchange="verificarCheckboxMarcado()" />
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-controller="Produto" asp-action="RemoverProdutoEntregue" method="post" autocomplete="off">
+    <partial name="ModalRemover.cshtml" />
+</form>
+
+<script>
+    var produtosSelecionados = [];
+
+    function verificarCheckboxMarcado() {
+        produtosSelecionados = [];
+        var algumCheckboxMarcado = false;
+        $('.check-remove').each(function () {
+            if ($(this).is(':checked')) {
+                algumCheckboxMarcado = true;
+                var row = $(this).closest('tr');
+                var produto = {
+                    idMovimento: row.find('td:eq(1)').text(),
+                    identificaOs: row.find('td:eq(2)').text(),
+                    idProduto: row.find('td:eq(3)').text().split('Id Produto: ')[1].split(';')[0].trim(),
+                    nomeProduto: row.find('td:eq(3)').text().split(';')[1].split('Produto: ')[1].trim(),
+                    fabricProduto: row.find('td:eq(4)').text(),
+                    qtdeInteira: row.find('td:eq(5)').text()
+                };
+                produtosSelecionados.push(produto);
+            }
+        });
+
+        // Serializar o array de produtos selecionados em JSON
+        var listaProdutosJSON = JSON.stringify(produtosSelecionados);
+        console.log(listaProdutosJSON);
+
+        // Definir o valor do input com a lista de produtos em JSON
+        $('#listaProdutosModalRemover').val(listaProdutosJSON);
+
+        // Habilitar ou desabilitar o botão de confirmação com base nos resultados da verificação
+        if (algumCheckboxMarcado) {
+            $('#btn-confirmar-produtos-remover').prop('disabled', false);
+        } else {
+            $('#btn-confirmar-produtos-remover').prop('disabled', true);
+        }
+    }
+</script>

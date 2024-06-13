@@ -1,0 +1,86 @@
+create or alter procedure SP_SYSO_ESTOQUE_REMOV_ITEM_MOV (
+    ID_MOVIMENTO integer,
+    ID_PRODUTO varchar(13),
+    QUANT_INTEIRA integer,
+    ID_EMPRESA INTEGER,
+    ID_FILIAL INTEGER,
+    ID_USUARIO INTEGER,
+    NOME_PRODUTO varchar (100),
+    CODIGO_FABRICANTE VARCHAR (20)
+    )
+returns (RESULT_FLAG INTEGER)
+as
+DECLARE VARIABLE COUNT_ITEM INTEGER;
+DECLARE VARIABLE SEQ_USUARIO INTEGER;
+BEGIN
+    SELECT COUNT(*)
+    FROM MOVIMENTO_ITENS
+    WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+    INTO :COUNT_ITEM;
+
+    SELECT COUNT(*)
+    FROM MOVIMENTO_USUARIOS
+    WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+    INTO :SEQ_USUARIO;
+
+    IF (:COUNT_ITEM > 1) THEN
+    BEGIN
+        DELETE FROM MOVIMENTO_ITENS
+        WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+            AND ID_PRODUTO = :ID_PRODUTO;
+
+        DELETE FROM SYSO_ESTOQUE_CARRINHO
+        WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+            AND ID_PRODUTO = :ID_PRODUTO;
+
+        INSERT INTO MOVIMENTO_USUARIOS (
+            ID_EMPRESA,
+            ID_FILIAL,
+            ID_MOVIMENTO,
+            SEQUENCIA_USUARIO,
+            ID_USUARIO,
+            OPERACAO,
+            DETALHES,
+            INTERNO,
+            DATA_OPERACAO
+        )
+        VALUES (
+            :ID_EMPRESA,
+            :ID_FILIAL,
+            :ID_MOVIMENTO,
+            :SEQ_USUARIO + 1,
+            :ID_USUARIO,
+            998,
+            '(GESTOR) - CANCELAMENTO DO ITEM: ' || FORMATDATETIME('dd/mm/yyyy HH:MM:SS', CURRENT_TIMESTAMP) || ' ITEM: ' || :CODIGO_FABRICANTE || '- ' || :NOME_PRODUTO,
+            'S',
+            CURRENT_TIMESTAMP
+        );
+
+
+        UPDATE MOVIMENTO
+        SET DATA_OPERACAO = current_timestamp,
+        TOTAL_LIQUIDO = (
+            SELECT SUM(TOTAL_LIQUIDO)
+            FROM MOVIMENTO_ITENS 
+            WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+            ),
+        TOTAL_BRUTO = (
+            SELECT SUM(TOTAL_LIQUIDO)
+            FROM MOVIMENTO_ITENS 
+            WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+            ),
+        VALOR_REAL = (
+            SELECT SUM(TOTAL_LIQUIDO)
+            FROM MOVIMENTO_ITENS 
+            WHERE ID_MOVIMENTO = :ID_MOVIMENTO
+            )
+        WHERE ID_MOVIMENTO = :ID_MOVIMENTO;
+
+        RESULT_FLAG = 1;
+    END
+    ELSE
+    BEGIN
+        RESULT_FLAG = 2;
+    END
+
+END;

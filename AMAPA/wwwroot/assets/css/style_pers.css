@@ -1,0 +1,275 @@
+.custom-input {
+    padding: 4px;
+}
+
+.text-uppercase {
+    text-transform: uppercase;
+}
+
+input#senhaDiretoria,
+input#senhaLiberacao {
+    width: 150px; /* Defina o tamanho desejado */
+    margin-bottom: 10px;
+}
+
+input#verifCodBarras {
+    width: 100%;
+}
+
+
+
+/* Style para os checkboxes */
+.styled-checkbox {
+    width: 20px;
+    height: 20px;
+    border: 2px solid #999;
+    border-radius: 3px;
+    outline: none;
+    cursor: pointer;
+}
+
+.custom-checkbox {
+    width: 15px; /* largura desejada */
+    height: 15px; /* altura desejada */
+}
+
+
+
+/* Style usado no arquivo layout (Barra de navegação e footer) */
+.nav-links {
+    padding: 0px 32px;
+    text-decoration: none;
+    color: #E5E5E5;
+    transition: background-color 0.3s;
+}
+
+    .nav-links:hover {
+        color: #CCCCCC;
+    }
+
+    .nav-links.active {
+        font-weight: bold;
+        color: #CCCCCC;
+    }
+
+.larger-font {
+    font-size: 18px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.content-wrapper {
+    flex: 1;
+    padding-top: 46px;
+}
+
+.footer {
+    position: relative;
+    width: 100%;
+    text-align: center;
+    margin-top: auto;
+}
+
+
+
+/* SCROLLBAR */
+::-webkit-scrollbar {
+    width: 5px; /* Define a largura da barra de rolagem como 5 pixels */
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888; /* Define a cor de fundo do indicador como cinza escuro (#888) */
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1; /* Define a cor de fundo da pista como cinza claro (#f1f1f1) */
+}
+
+
+
+/* Style usado para ter a imagem de lupa no modal de add produto no carrinho e da lista de produtos do modal*/
+.input-with-icon {
+    position: relative;
+    width: 100%; /* Defina a largura conforme necessário */
+}
+
+    .input-with-icon input {
+        padding-right: 40px; /* Espaçamento para o botão */
+        border: 2px solid #ccc; /* Define a borda do campo de entrada */
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+        box-sizing: border-box; /* Define o modelo de caixa (box-sizing) para incluir preenchimento e borda na largura total */
+        color: gray;
+    }
+
+    .input-with-icon .icon {
+        position: absolute;
+        top: 0;
+        right: 0;
+        height: 100%;
+        padding: 7px 10px; /* Ajuste conforme necessário para alinhamento vertical */
+        background-color: transparent;
+        border: none;
+        color: #777;
+        cursor: pointer;
+    }
+
+.search {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    max-height: 150px;
+    overflow-y: auto;
+    background-color: #FFFFFF;
+}
+
+    .search li {
+        padding: 8px 12px;
+        cursor: pointer;
+    }
+
+        .search li:hover {
+            background-color: #d6e0ff;
+        }
+
+
+
+/* Import de uma fonte de letra */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap') body
+{
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+/* Estiliza o modal 
+.modal {
+    position: fixed; /* Define a posição do modal como fixa para que ele permaneça fixo na tela
+    top: 0; /* Alinha o topo do modal com o topo da janela de visualização 
+    left: 0; /* Alinha a esquerda do modal com a esquerda da janela de visualização 
+    width: 100%; /* Define a largura do modal como 100% da largura da janela de visualização
+    height: 100%; /* Define a altura do modal como 100% da altura da janela de visualização 
+    z-index: 1050; /* Define o índice Z para garantir que o modal seja exibido sobre outros elementos 
+    overflow: auto; /* Define overflow como auto para permitir rolagem quando necessário 
+    background-color: rgba(0, 0, 0, 0.5); /* Define um fundo semi-transparente para o modal 
+}
+
+/* Estiliza o diálogo do modal 
+.modal-dialog {
+    width: 100%; /* Define a largura do diálogo modal como 100% da largura do modal
+    height: 100%; /* Define a altura do diálogo modal como 100% da altura do modal 
+    margin: 0; /* Remove margens para preencher completamente o modal 
+    padding: 0; /* Remove preenchimento para preencher completamente o modal 
+}
+
+/* Estiliza o conteúdo do modal 
+.modal-content {
+    height: 100%; /* Define a altura do conteúdo modal como 100% da altura do diálogo modal 
+    border: none; /* Remove a borda do conteúdo modal 
+    border-radius: 0; /* Remove o raio da borda do conteúdo modal 
+    box-shadow: none; /* Remove sombras do conteúdo modal 
+}
+
+.modal-header {
+    background: #D9D9D9;
+}
+
+.modal-body {
+    background: #EBEBEB;
+}
+
+.modal-table {
+    margin-top: 8px; /* Define a margem superior do formulário 
+    margin: 8px; /* Define a margem superior do formulário 
+    padding: 40px; /* Define o preenchimento interno do formulário *
+    border: 1px solid #666; /* Define a borda do formulário *
+    border-radius: 40px; /* Define o raio dos cantos da borda do formulário *
+    background-color: #E0E0E0; /* Define a cor de fundo do formulário *
+    transition: border-color 0.3s; /* Adiciona uma transição suave para a cor da borda *
+    /*display: grid;  Usa um layout de grid para o formulário *
+    /*grid-template-columns: repeat(2, 1fr); /* Define três colunas de largura igual *
+}
+
+    /* Estilos para os campos de entrada de texto *
+    .modal-table input[type="text"] {
+        width: 80%; /* Define a largura do campo de entrada como 80% *
+        padding: 4px; /* Define o preenchimento interno do campo de entrada *
+        border: 1px solid #ccc; /* Define a borda do campo de entrada *
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada *
+        box-sizing: border-box; /* Define o modelo de caixa (box-sizing) para incluir preenchimento e borda na largura total *
+        color: gray;
+    }
+
+        /* Estilos para as bordas quando o campo de entrada está em foco *
+        .modal-table input[type="text"]:focus {
+            border-color: #0066ff; /* Define a cor da borda quando o campo está em foco *
+            outline: none; /* Remove o contorno padrão que alguns navegadores adicionam quando um campo está em foco *
+        }
+
+    .modal-table th, td {
+        word-wrap: break-word !important; /* Para navegadores mais antigos *
+        overflow-wrap: break-word !important; /* Para navegadores modernos *
+        white-space: normal;
+    }
+
+        /* Ajusta o tamanho do dropdown na coluna "Cod. Barras" *
+        .modal-table td:nth-child(1),
+        .modal-table th:nth-child(1) { /* Seleciona o dropdown no cabeçalho da sexta coluna *
+            width: 15%; /* Define a largura do dropdown como 100% *
+            /* Outros estilos conforme necessário *
+        }
+
+        /* Ajusta o tamanho da coluna "Fabricante" *
+        .modal-table td:nth-child(3),
+        .modal-table th:nth-child(3) { /* Seleciona o dropdown no cabeçalho da sexta coluna *
+            width: 10%; /* Define a largura do dropdown como 100% *
+            /* Outros estilos conforme necessário *
+        }
+
+        /* Ajusta o tamanho da coluna "Preço - Venda" *
+        .modal-table td:nth-child(4),
+        .modal-table th:nth-child(4) { /* Seleciona o dropdown no cabeçalho da sexta coluna *
+            width: 10%; /* Define a largura do dropdown como 100% *
+            /* Outros estilos conforme necessário *
+        }
+
+        /* Ajusta o tamanho da coluna "Qtde Liberada" *
+        .modal-table td:nth-child(5),
+        .modal-table th:nth-child(5) { /* Seleciona o dropdown no cabeçalho da sexta coluna *
+            width: 12%; /* Define a largura do dropdown como 100% *
+            /* Outros estilos conforme necessário *
+        }
+
+        /* Ajusta o tamanho da coluna "Entregue?" *
+        .modal-table td:nth-child(7),
+        .modal-table th:nth-child(7) { /* Seleciona o dropdown no cabeçalho da sexta coluna *
+            width: 15%; /* Define a largura do dropdown como 100% *
+            /* Outros estilos conforme necessário *
+        }
+
+    /* Estilos para o dropdown *
+    .modal-table select {
+        width: 100%; /* Define a largura do dropdown *
+        padding: 8px; /* Define o preenchimento interno do dropdown *
+        border: 1px solid #ccc; /* Define a borda do dropdown *
+        border-radius: 5px; /* Define o raio dos cantos da borda do dropdown *
+        box-sizing: border-box; /* Define o modelo de caixa para incluir preenchimento e borda na largura total *
+        color: gray; /* Define a cor do texto do dropdown *
+    }
+
+        /* Estilos para a borda quando o dropdown está em foco *
+        .modal-table select:focus {
+            border-color: #0066ff; /* Define a cor da borda quando o dropdown está em foco *
+            outline: none; /* Remove o contorno padrão que alguns navegadores adicionam quando um dropdown está em foco *
+        }
+
+        .modal-table select option {
+            padding: 8px; /* Define o preenchimento interno das opções *
+            color: gray; /* Define a cor do texto das opções *
+            background-color: #fff; /* Define a cor de fundo das opções *
+            border: 1px solid #ccc; /* Define a borda das opções 
+            border-radius: 5px; /* Define o raio dos cantos da borda das opções 
+        }
+*/

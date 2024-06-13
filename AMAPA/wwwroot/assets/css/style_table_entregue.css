@@ -1,0 +1,63 @@
+﻿.body-table-entregue th, td {
+    word-wrap: break-word !important; /* Para navegadores mais antigos */
+    overflow-wrap: break-word !important; /* Para navegadores modernos */
+    white-space: normal;
+}
+    /* Ajusta a largura da coluna "Data" */
+    .body-table-entregue td:nth-child(1),
+    .body-table-entregue th:nth-child(1) {
+        width: 7%;
+    }
+
+    /* Ajusta a largura da coluna "OS" */
+    .body-table-entregue td:nth-child(2),
+    .body-table-entregue th:nth-child(2) {
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Descrição" */
+    .body-table-entregue td:nth-child(3),
+    .body-table-entregue th:nth-child(3) {
+        text-align: left;
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Produto" */
+    .body-table-entregue td:nth-child(4),
+    .body-table-entregue th:nth-child(4) {
+        text-align: left;
+        width: 25%;
+    }
+
+    /* Ajusta a largura da coluna "Fabricante" */
+    .body-table-entregue td:nth-child(5),
+    .body-table-entregue th:nth-child(5) {
+        text-align: left;
+        width: 8%;
+    }
+
+    /* Ajusta a largura da coluna "Quantidade" */
+    .body-table-entregue td:nth-child(6),
+    .body-table-entregue th:nth-child(6) {
+        width: 5%;
+    }
+
+    /* Ajusta a largura da coluna "Executor" */
+    .body-table-entregue td:nth-child(7),
+    .body-table-entregue th:nth-child(7) {
+        text-align: left;
+        width: 15%;
+    }
+
+    /* Ajusta a largura da coluna "Estoquista" */
+    .body-table-entregue td:nth-child(8),
+    .body-table-entregue th:nth-child(8) {
+        text-align: left;
+        width: 15%;
+    }
+
+    /* Ajusta a largura da coluna "Devolver" */
+    .body-table-entregue td:nth-child(9),
+    .body-table-entregue th:nth-child(9) {
+        width: 20%;
+    }

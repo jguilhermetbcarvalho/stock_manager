@@ -1,0 +1,80 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastras Senha Gestão</title>
+
+    <style>
+        .centered-div {
+            margin: 0 auto; /* Isso centraliza a div horizontalmente */
+            width: 60%; /* Defina a largura desejada para sua div */
+            text-align: left; /* Isso alinha o texto à direita dentro da div */
+        }
+
+        .right-div{
+            margin: 0 auto;
+            width: 50%;
+            text-align: right;
+        }
+
+            .right-div label {
+                margin-right: 4px; /* Ajuste a margem conforme necessário */
+            }
+    </style>
+
+</head>
+
+<body>
+    <div style="margin-top:4.5rem;">
+        <div class="mb-4 mt-4 card-user centered-div">
+            <div>
+                <h5>
+                    Primeiro acesso do usuário @ViewBag.UserId - @ViewBag.UserName
+                </h5>
+                <h6>
+                    Por favor, insira a nova senha de acesso:
+                </h6>
+            </div>
+            <div class="mt-4" style="text-align:center">
+                <form class="userForm" method="post" asp-controller="Login" asp-action="PrimeiroAcesso" onsubmit="return validarSenhas()">
+                    <div class="right-div">
+                        <label><strong>Nova senha:</strong></label><input type="password" id="senha1" name="senhaAcesso" style="margin-bottom: 20px;">
+                        <br>
+                        <label><strong>Confirme a senha:</strong></label><input type="password" id="senha2" name="senha2" style="margin-bottom: 60px;">
+                    </div>
+                    <input type="hidden" name="idUsuario" value="@ViewBag.UserId" />
+                    <button class="btn btn-confirmar-azul btn-opacity" type="submit" style="position: absolute; bottom: 15px; right: 15px;">Salvar</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
+
+<script>
+    function validarSenhas() {
+        var senha1 = document.getElementById("senha1").value;
+        var senha2 = document.getElementById("senha2").value;
+
+        if (senha1 !== senha2) {
+            Swal.fire({
+                icon: 'error',
+                title: 'As senhas não coincidem.',
+                showConfirmButton: false,
+                timer: 1200
+            });
+            return false; // Impede o envio do formulário
+        }
+        return true; // Permite o envio do formulário se as senhas coincidirem
+    }
+</script>

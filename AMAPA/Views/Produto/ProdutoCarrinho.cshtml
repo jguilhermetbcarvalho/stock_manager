@@ -1,0 +1,110 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title> Produtos no carrinho - Auto Elétrica Amapá</title>
+</head>
+
+<body>
+
+    <div class="row">
+        <div class="col-md-12" >
+            <div class="card style-card style-card-shadow" style="margin-top: 80px; margin-left: 20px;">
+                <div class="card-header d-flex justify-content-between style-card">
+                    <div class="header-title">
+                        <h5> Produtos entregue - Sem O.S. vinculada</h5>
+                    </div>
+                    <div class="align-self-end">
+                        <button id="btn-adicionar-produtos" class="btn btn-confirmar-azul" type="button" data-bs-toggle="modal" data-bs-target="#staticBackdrop">
+                            Adicionar produto no carrinho
+                        </button>
+
+                        <button id="btn-confirmar-produtos-entrega" class="btn btn-confirmar-verde" type="button" data-bs-toggle="modal" data-bs-target="#modalVincular" disabled>
+                            Vincular produto(s)
+                        </button>
+
+                        <button id="btn-confirmar-produtos-remover" class="btn btn-confirmar-vermelho" type="button" data-bs-toggle="modal" data-bs-target="#modalDevolver" disabled>
+                            Remover produto(s)
+                        </button>
+                    </div>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive body-table-carrinho">
+                        <partial name="TabelaProdutoCarrinho.cshtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <partial name="ModalAddProduto.cshtml" />
+</body>
+</html>
+
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "Insert") {
+                // Abre o modal de adicionar produto
+                var modal = new bootstrap.Modal(document.getElementById('staticBackdrop'));
+                modal.show();
+                // Evita que o evento seja propagado para outros elementos
+                event.preventDefault();
+            }
+        });
+    });
+
+        document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("keydown", function (event) {
+                // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+                if (event.altKey && event.key === "s") {
+                document.getElementById("salvar").click();
+                }
+            });
+        });
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "v") {
+                document.getElementById("btn-confirmar-produtos-entrega").click();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "s") {
+                document.getElementById("confirma-vincular").click();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "Delete") {
+                document.getElementById("btn-confirmar-produtos-remover").click();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "s") {
+                document.getElementById("confirma-devolucao").click();
+            }
+        });
+    });
+</script>
+

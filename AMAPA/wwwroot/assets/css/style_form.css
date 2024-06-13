@@ -1,0 +1,36 @@
+﻿.dynamicForm {
+    margin-top: 1px; /* Define a margem superior do formulário */
+    /*background-color: black; / Define a cor de fundo do formulário */
+    transition: border-color 0.3s; /* Adiciona uma transição suave para a cor da borda */
+    display: grid; /* Usa um layout de grid para o formulário */
+    grid-template-columns: repeat(1, 1fr); /* Define três colunas de largura igual */
+}
+
+    /* Estilos para os campos de entrada de texto */
+    .dynamicForm input[type="text"] {
+        border: 2px solid #ccc; /* Define a borda do campo de entrada */
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+    }
+
+        /* Estilos para as bordas quando o campo de entrada está em foco */
+        .dynamicForm input[type="text"]:focus {
+            border-color: #0066ff; /* Define a cor da borda quando o campo está em foco */
+            outline: none; /* Remove o contorno padrão que alguns navegadores adicionam quando um campo está em foco */
+        }
+
+    .dynamicForm select {
+        border: 2px solid #ccc; /* Define a borda do campo de entrada */
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+    }
+
+.userForm {
+    transition: border-color 0.3s; /* Adiciona uma transição suave para a cor da borda */
+}
+    .userForm input[type="password"] {
+        border: 1px solid #ccc; /* Define a borda do campo de entrada */
+        border-radius: 5px; /* Define o raio dos cantos da borda do campo de entrada */
+    }
+        .userForm input[type="password"]:focus {
+            border-color: #0066ff; /* Define a cor da borda quando o campo está em foco */
+            outline: none; /* Remove o contorno padrão que alguns navegadores adicionam quando um campo está em foco */
+        }

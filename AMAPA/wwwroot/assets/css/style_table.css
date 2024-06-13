@@ -1,0 +1,41 @@
+﻿.dataTables_filter input[type="search"] {
+    background-color: #f8f9fa; /* Cor de fundo do campo de busca */
+    color: #212529; /* Cor do texto do campo de busca */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3); /* Sombra */
+}
+
+.table {
+    font-family: 'Times New Roman', sans-serif; /* Fonte */
+    font-size: 14px; /* Tamanho da fonte */
+    border-radius: 15px; /* Raio da borda */
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+    .table th {
+        background-color: #f8f9fa; /* Cor de fundo do cabeçalho da tabela */
+        color: #212529; /* Cor do texto do cabeçalho da tabela */
+    }
+
+    .table th,
+    .table td {
+        padding: 8px; /* Espaçamento interno */
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center; /* Centralizar o conteúdo do cabeçalho */
+    }
+
+    .table td {
+        color: #212529 !important; /* Cor do texto das células da tabela */
+    }
+
+.table-striped tbody tr:nth-of-type(odd) {
+    background-color: #f8f9fa; /* Cor de fundo de linhas ímpares */
+}
+
+.table-striped tbody tr:nth-of-type(even) {
+    background-color: #f8f9fa; /* Cor de fundo de linhas pares */
+}
+
+.table-hover tbody tr:hover {
+    background-color: #d6e0ff; /* Cor de fundo ao passar o mouse sobre a linha */
+}

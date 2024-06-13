@@ -1,0 +1,93 @@
+﻿@model IList<AMAPA.Models.MovimentoProdutoPendente>
+
+@using Newtonsoft.Json;
+@{
+    var usuario = (!string.IsNullOrEmpty(Context.Session.GetString("user"))) ? JsonConvert.DeserializeObject<Usuarios>(Context.Session.GetString("user")) : new Usuarios();
+}
+
+<table class="table table-striped table-hover" data-toggle="data-table">
+    <thead>
+        <tr>
+            <th class="text-center">Data</th>
+            <th class="text-center">O.S</th>
+            <th class="text-center">Descrição</th>
+            <th class="text-center">Produto</th>
+            <th class="text-center">Fabricante</th>
+            <th class="text-center">Loc</th>
+            <th class="text-center">Qtde</th>
+            <th class="text-center">Selecionar</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var movimento in Model)
+        {
+            <tr>
+                <td>@movimento.DATA_MOVIMENTO</td>
+                <td>@movimento.ID_MOVIMENTO</td>
+                <td>@movimento.IDENTIFICA_OS</td>
+                <td>Id Produto: @movimento.ID_PRODUTO; <br /> Produto: @movimento.PRODUTO </td>
+                <td>@movimento.CODIGO_FABRICA</td>
+                <td>@movimento.LOCALIZACAO</td>
+                <td>@movimento.QTDE_INTEIRA</td>
+                <td>
+
+                    <input id="checkbox-entrega" class="check-entrega styled-checkbox" type="checkbox" onchange="verificarCheckboxMarcado()" onclick="preencherCamposCodBarras('@movimento.ID_PRODUTO', '@movimento.LOCALIZACAO')" />
+
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+<form asp-controller="Produto" asp-action="ConfirmarEntregaProdutoPendente" method="post" autocomplete="off">
+    <partial name="ModalEntregar.cshtml" />
+</form>
+
+
+<partial name="ModalCodBarras.cshtml" />
+
+<script>
+    var produtosSelecionados = [];
+
+    function verificarCheckboxMarcado() {
+        produtosSelecionados = [];
+        var algumCheckboxMarcado = false;
+
+        $('.check-entrega').each(function () {
+            if ($(this).is(':checked')) {
+                algumCheckboxMarcado = true;
+                var row = $(this).closest('tr');
+                var produto = {
+                    idMovimento: row.find('td:eq(1)').text(),
+                    idProduto: row.find('td:eq(3)').text().split('Id Produto: ')[1].split(';')[0].trim(),
+                    nomeProduto: row.find('td:eq(3)').text().split(';')[1].split('Produto: ')[1].trim(),
+                    identificaOs: row.find('td:eq(2)').text(),
+                    qtdeInteira: row.find('td:eq(6)').text()
+                };
+                produtosSelecionados.push(produto);
+            }
+
+            if (algumCheckboxMarcado) {
+                $('#modalCodBarras').modal('show'); // Abrir o modal se algum checkbox estiver marcado
+                document.getElementById('verifCodBarras').value = '';
+            } else {
+                $('#modalCodBarras').modal('hide'); // Fechar o modal se nenhum checkbox estiver marcado
+            }
+        });
+
+        // Serializar o array de produtos selecionados em JSON
+        var listaProdutosJSON = JSON.stringify(produtosSelecionados);
+        console.log(listaProdutosJSON);
+
+        // Definir o valor do input com a lista de produtos em JSON
+        $('#listaProdutosModalEntregar').val(listaProdutosJSON);
+
+        // Habilitar ou desabilitar o botão de confirmação com base nos resultados da verificação
+        if (algumCheckboxMarcado) {
+            $('#btn-confirmar-produtos-entrega').prop('disabled', false);
+        } else {
+            $('#btn-confirmar-produtos-entrega').prop('disabled', true);
+        }
+    }
+</script>
+

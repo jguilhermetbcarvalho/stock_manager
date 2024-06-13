@@ -1,0 +1,66 @@
+﻿@{
+    Layout = "_Layout";
+}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Produtos pendentes - Auto Elétrica Amapá</title>
+</head>
+
+<body>
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="card style-card style-card-shadow" style="margin-top: 80px; margin-left: 20px;">
+                <div class="card-header d-flex justify-content-between style-card">
+                    <div class="header-title">
+                        <h5>Produtos pendentes de entrega</h5>
+                    </div>
+
+                    <button id="btn-confirmar-produtos-entrega" disabled type="button" class="btn btn-confirmar-verde float-end" data-bs-toggle="modal" data-bs-target="#modalEntregar">
+                        Entregar produto(s)
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive body-table-pendente">
+                        <partial name="TabelaProdutoPendente.cshtml" />
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "Insert") {
+                document.getElementById("btn-confirmar-produtos-entrega").click();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.altKey && event.key === "s") {
+                document.getElementById("confirma-entrega").click();
+            }
+        });
+    });
+
+    document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("keydown", function (event) {
+            // Verifica se a tecla Alt e a tecla correspondente ao atalho foram pressionadas
+            if (event.keyCode === 13) {
+                document.getElementById("btn-verificar").click();
+            }
+        });
+    });
+</script>
+

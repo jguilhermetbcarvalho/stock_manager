@@ -1,0 +1,36 @@
+﻿<div class="modal fade" id="modalEditQuant" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Atualizar quantidade</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="idPkModalEditarQuantidade" name="idPk" type="hidden" />
+                <input id="idProdutoModalEditarQuantidade" name="idProduto" type="hidden" />
+                <input id="nomeProdutoModalEditarQuantidade" name="nomeProduto" type="hidden" />
+                <input id="quantInteiraModalEditarQuantidade" name="quantInteira" type="hidden" />
+
+                <label>Quantidade</label>
+                <input id="novaQuantInteira" class="form-control form-control-sm" name="novaQuantInteira" type="text" autocomplete="off" required />
+
+                <div class="text-center">
+                    <button id="btn-atualizar" class="btn btn-primary btn-modal" type="submit" style="margin-top: 2rem;">
+                        Atualizar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('modalEditQuant');
+
+        modal.addEventListener('shown.bs.modal', function () {
+            document.getElementById('novaQuantInteira').focus();
+        });
+    });
+</script>

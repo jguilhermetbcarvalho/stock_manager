@@ -1,0 +1,35 @@
+﻿.body-table-codbarras th, td {
+    word-wrap: break-word !important; /* Para navegadores mais antigos */
+    overflow-wrap: break-word !important; /* Para navegadores modernos */
+    white-space: normal;
+}
+
+    /* Ajusta a largura da coluna "Data" */
+    .body-table-codbarras td:nth-child(1),
+    .body-table-codbarras th:nth-child(1) {
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Id Produto" */
+    .body-table-codbarras td:nth-child(2),
+    .body-table-codbarras th:nth-child(2) {
+        width: 10%;
+    }
+
+    /* Ajusta a largura da coluna "Cod Barras Gestor" */
+    .body-table-codbarras td:nth-child(3),
+    .body-table-codbarras th:nth-child(3) {
+        width: 15%;
+    }
+
+    /* Ajusta a largura da coluna "Localização" */
+    .body-table-codbarras td:nth-child(4),
+    .body-table-codbarras th:nth-child(4) {
+        width: 5%;
+    }
+
+    /* Ajusta a largura da coluna "Confirmar" */
+    .body-table-codbarras td:nth-child(5),
+    .body-table-codbarras th:nth-child(5) {
+        width: 10%;
+    }

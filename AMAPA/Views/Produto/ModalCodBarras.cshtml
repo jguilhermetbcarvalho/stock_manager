@@ -1,0 +1,90 @@
+﻿<div class="modal fade" id="modalCodBarras" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="staticBackdropLabel">Validar código de barras</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+
+                <input id="idProdutoModalCodBarras" name="idProduto" type="hidden" />
+                <input id="locProdutoModalCodBarras" name="locProduto" type="hidden" />
+
+                <label>Código de Barras</label>
+                <input id="verifCodBarras" class="form-control form-control-sm" name="codBarrasGestor" type="text" autocomplete="off" required />
+
+                <div class="text-center">
+                    <button id="btn-verificar" class="btn btn-primary btn-modal" type="button" style="margin-top: 2rem;" onclick="VerificaCodBarras()">
+                        Verificar
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        var modal = document.getElementById('modalCodBarras');
+
+        // Adiciona um evento para quando o modal for exibido
+        modal.addEventListener('shown.bs.modal', function () {
+            // Define o foco no campo "verifCodBarras"
+            document.getElementById('verifCodBarras').focus();
+        });
+    }); // Fechar corretamente o bloco de código do evento DOMContentLoaded
+</script>
+
+<script>
+    // Adiciona o evento de clique ao botão "Verificar" fora da função
+    document.getElementById('btn-verificar').addEventListener('click', function () {
+        // Chama a função VerificaCodBarras() quando o botão for clicado
+        VerificaCodBarras();
+    });
+
+    function VerificaCodBarras() {
+        // Obtém o valor do campo "verifCodBarras"
+        var idProd = $("#idProdutoModalCodBarras").val();
+        var loc = $("#locProdutoModalCodBarras").val();
+        var codBarrasG = $('#verifCodBarras').val();
+        var codBarrasS = $("#codBarrasSolutionModalCodBarras").val();
+
+        if (idProd != '') {
+            $.ajax({
+                url: "/Produto/VerificarCodBarras",
+                type: 'POST',
+                dataType: 'json',
+                data: { idProduto: idProd, locProduto: loc, codBarrasGestor: codBarrasG, codBarrasSolution: codBarrasS },
+                success: function (data) {
+                    if (data === true) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Código de barras verificado!',
+                            showConfirmButton: false,
+                            timer: 1200
+                        }).then(function () {
+                            // Fecha o modal
+                            $('#modalCodBarras').modal('hide');
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'info',
+                            title: 'Código de barras não coincide. Favor verificar no Solution posteriormente.',
+                            showConfirmButton: false,
+                            timer: 1200
+                        }).then(function () {
+                            // Fecha o modal
+                            $('#modalCodBarras').modal('hide');
+                        });
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            });
+        }
+    }
+</script>
+
+
+
