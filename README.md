@@ -1,1 +1,1 @@
-# gestor_estoque
+# Stock Manager
